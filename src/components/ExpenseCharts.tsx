@@ -21,15 +21,22 @@ export function ExpenseCharts({ expenses }: ExpenseChartsProps) {
   }));
 
   const monthlyTotals = expenses.reduce((acc, expense) => {
-    const month = new Date(expense.date).toLocaleString('default', { month: 'short' });
-    acc[month] = (acc[month] || 0) + Number(expense.amount);
+    const key = expense.date.substring(0, 7); // YYYY-MM
+    acc[key] = (acc[key] || 0) + Number(expense.amount);
     return acc;
   }, {} as Record<string, number>);
 
-  const barData = Object.entries(monthlyTotals).map(([name, value]) => ({
-    name,
-    amount: value
-  }));
+  const barData = Object.entries(monthlyTotals)
+    .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+    .map(([key, value]) => {
+      const [year, month] = key.split('-');
+      const date = new Date(parseInt(year), parseInt(month) - 1);
+      const name = date.toLocaleString('default', { month: 'short', year: 'numeric' });
+      return {
+        name,
+        amount: value
+      };
+    });
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
