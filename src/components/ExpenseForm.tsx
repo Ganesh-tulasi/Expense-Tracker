@@ -61,8 +61,9 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
       
       <div className="grid grid-cols-1 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
+          <label htmlFor="amount" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
           <input
+            id="amount"
             type="number"
             step="0.01"
             required
@@ -73,8 +74,9 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+          <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
           <select
+            id="category"
             value={expense.category}
             onChange={(e) => setExpense({ ...expense, category: e.target.value })}
             className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -86,8 +88,9 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
           <input
+            id="description"
             type="text"
             value={expense.description || ''}
             onChange={(e) => setExpense({ ...expense, description: e.target.value })}
@@ -96,8 +99,9 @@ export function ExpenseForm({ onExpenseAdded }: ExpenseFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date</label>
+          <label htmlFor="date" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date</label>
           <input
+            id="date"
             type="date"
             required
             value={expense.date}

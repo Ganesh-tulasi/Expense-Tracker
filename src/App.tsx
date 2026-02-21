@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Wallet, Loader2, Moon, Sun } from 'lucide-react';
+import type { Session } from '@supabase/supabase-js';
 import { supabase } from './lib/supabase';
 import { ExpenseForm } from './components/ExpenseForm';
 import { ExpensesList } from './components/ExpensesList';
@@ -8,7 +9,7 @@ import type { Expense } from './types/database';
 
 function App() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -69,7 +70,7 @@ function App() {
         setAuthError('Account created! You can now sign in.');
         setIsSignUp(false);
       }
-    } catch (err) {
+    } catch {
       setAuthError('An unexpected error occurred');
     } finally {
       setIsLoading(false);
